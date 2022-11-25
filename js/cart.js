@@ -25,7 +25,7 @@ function GetList() {
         sum += +int_price;
         row += `
             <tr >
-                    <th  scope="row">${pr.Id}</th>
+                    <th class="Id" scope="row">${pr.Id}</th>
                     <td class="img-td">
                         <img src=${pr.Image} alt="">
                     </td>
@@ -37,7 +37,7 @@ function GetList() {
                         <span  class="text-success fw-bold sum">${int_price * pr.Count} AZN</span>
                     </td>
                     <td>
-                        <button onclick="Delete()" class="btn btn-warning" >sil</button>
+                        <button id=${pr.Id} onclick="DeletePr()" class="btn btn-warning delete" >sil</button>
                     </td>
                     
             </tr>
@@ -70,7 +70,7 @@ function ShowPrice(){
             int_price = int_price * i.value;
             total_sum += +int_price;
             if(t < sum.length){
-                sum[t].innerHTML = int_price + " AZN"
+                sum[t].innerHTML = int_price.toFixed(2) + " AZN"
             }
             t++
             
@@ -78,9 +78,34 @@ function ShowPrice(){
         }
         x++
     }
-    total.innerHTML = `Toplam : ${total_sum} AZN`
+    total.innerHTML = `Toplam : ${total_sum.toFixed(2)} AZN`
+
+    localStorage.setItem('products',JSON.stringify(basket))
+
    
 }
-function Delete(){
-    console.log(this.parentElement);
+function DeletePr() {
+    let basket = JSON.parse(localStorage.getItem('products'));
+    let dlt = document.querySelectorAll('.delete')
+    let count = 0;
+        for (const i of dlt) {
+             i.onclick = function () {
+                for (const pr of basket) {
+                    if(pr.Id === i.id){
+                        basket.splice(count,1)
+                        console.log(basket);
+                        console.log(i.id);
+                        localStorage.setItem('products',JSON.stringify(basket))
+                        location.reload(); 
+
+                        break
+                    }
+                    count++
+
+                }
+        }
+     
 }
+    
+}
+

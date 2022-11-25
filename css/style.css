@@ -77,8 +77,14 @@ table img{
 
 .card img{
     height: 300px;
+    padding: 2rem;
+    border-radius: 30px;
 }
 #Top{
     text-align: right;
     color: green;
+}
+.card{
+    min-height: 500px;
+    max-height: 500px;
 }
