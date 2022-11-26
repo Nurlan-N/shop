@@ -11,7 +11,6 @@ function ShowAlert() {
     }
 }
 
-
 ShowAlert();
 
 function GetList() {
@@ -21,7 +20,6 @@ function GetList() {
     let row = '';
     basket.forEach(pr => {
         let int_price = pr.Price.slice(-(pr.Price.length),-4);
-        console.log(int_price);
         sum += +int_price;
         row += `
             <tr >
@@ -45,7 +43,12 @@ function GetList() {
         `
         ShowPrice();
     })
-    total.innerHTML = `Toplam : ${sum} AZN`
+    if (sum > 0) {
+        total.innerHTML = `Toplam : ${sum} AZN`;
+    }else{
+        total.style.display = "none";
+                
+    }
     document.getElementById('tbdy').innerHTML = row;
 
     
@@ -78,34 +81,31 @@ function ShowPrice(){
         }
         x++
     }
-    total.innerHTML = `Toplam : ${total_sum.toFixed(2)} AZN`
+    if (total_sum > 0) {
+        total.innerHTML = `Toplam : ${total_sum.toFixed(2)} AZN`
+    }
 
     localStorage.setItem('products',JSON.stringify(basket))
 
    
 }
+
 function DeletePr() {
-    let basket = JSON.parse(localStorage.getItem('products'));
-    let dlt = document.querySelectorAll('.delete')
-    let count = 0;
-        for (const i of dlt) {
-             i.onclick = function () {
-                for (const pr of basket) {
-                    if(pr.Id === i.id){
-                        basket.splice(count,1)
-                        console.log(basket);
-                        console.log(i.id);
-                        localStorage.setItem('products',JSON.stringify(basket))
-                        location.reload(); 
-
-                        break
-                    }
-                    count++
-
+let basket = JSON.parse(localStorage.getItem('products'));
+let dlt = document.querySelectorAll('.delete')
+let count = 0;
+    for (const i of dlt) {
+        i.addEventListener('click', function(){
+            for (const pr of basket) {
+                if(pr.Id === i.id){
+                    basket.splice(count,1)
+                    localStorage.setItem('products',JSON.stringify(basket))
+                    GetList();
+                    break
                 }
+            count++
         }
-     
+    },true)
 }
-    
 }
-
+DeletePr();
