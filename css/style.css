@@ -25,7 +25,21 @@ header i{
     color: #fff;
     position: relative;
 }
-
+header .logo{
+    width: 20%;
+}
+header .search{
+    width: 60%;
+    align-items: center;
+}
+header .basket{
+    width: 20%;
+}
+header .row{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
 #count{
     position: absolute;
     font-size: 14px;
@@ -84,7 +98,37 @@ table img{
     text-align: right;
     color: green;
 }
-.card{
-    min-height: 500px;
-    max-height: 500px;
+
+#List{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+#List .box{
+    padding: 10px;
+}
+.menu{
+    background-color: crimson;
+    padding-top: 30px;
+}
+.menu .box{
+    width: 30%;
+    text-align: center;
+}
+.menu .category{
+    display: flex;
+    justify-content: space-between;
+}
+.menu .box i{
+    background-color: #fff;
+    font-size: 20px;
+    padding: 15px;
+    border-radius: 100%;
+    cursor: pointer;
+    color: crimson;
+}
+.menu .box p{
+    color: #fff;
+    font-weight: bold;
 }
